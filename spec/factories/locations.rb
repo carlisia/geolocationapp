@@ -3,7 +3,6 @@ require 'faker'
 FactoryGirl.define do
         
   factory :location do
-    lat, lng = location_array.pop
     name { Faker::Company.name }
     address_1 { Faker::Address.street_address }
     address_2 { Faker::Address.secondary_address }
