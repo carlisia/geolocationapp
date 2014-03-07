@@ -1,11 +1,14 @@
 Geolocationapp::Application.routes.draw do
-  
-  
+
   #resources :locations, only: [:index, :show]
+  root to: 'home#index'
   
+  resources :home, only: [:index]
+
   resources :locations do
-      collection { post :import }
+    get "/locations" => "location#index"
+    collection    { post :import }
   end
-  
-  root to: 'locations#index'
+
+  #get "/locations" => "location#index", :as => :locationss
 end
