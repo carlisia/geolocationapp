@@ -1,11 +1,16 @@
 class LocationsController < ApplicationController
-  helper_method :locations, :location
+  helper_method :locations
 
   def locations
     @_locations ||= Location.all
   end
-
-  def location
-    @_location ||= locations.find(params[:id])
+  
+  def import
+    begin
+      Location.import(params[:file])
+      redirect_to root_url, notice: "Location list imported."
+    rescue
+      redirect_to root_url, notice: "Invalid CSV file format."
+    end
   end
 end

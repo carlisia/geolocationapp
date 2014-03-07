@@ -1,5 +1,11 @@
 Geolocationapp::Application.routes.draw do
-  root to: 'locations#index'
   
-  resources :locations, only: [:index, :show]
+  
+  #resources :locations, only: [:index, :show]
+  
+  resources :locations do
+      collection { post :import }
+  end
+  
+  root to: 'locations#index'
 end
