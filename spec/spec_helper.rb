@@ -17,7 +17,11 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
+  config.expect_with :rspec          # => rspec/expectations
+  config.expect_with :stdlib         # => Test::Unit or MinitTest
+  config.expect_with :rspec, :stdlib # => both
   config.before(:suite) {DatabaseCleaner.strategy = :truncation}
   config.before(:each) {DatabaseCleaner.start}
   config.after(:each) {DatabaseCleaner.clean}
+  config.include FactoryGirl::Syntax::Methods
 end
