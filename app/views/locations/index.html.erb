@@ -1,1 +1,10 @@
-<head><title>Geolocation App</title></head>
+<ul>
+  <% locations.each do |location| %>
+    <li>
+      <dl>
+        <dt>Name</dt>
+        <dd><%= link_to location.name, location %></dd>
+      </dl>
+    </li>
+  <% end %>
+</ul>
