@@ -15,21 +15,34 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
+  adapter: postgis
   encoding: utf8
   pool: 5
   username: <%= ENV['LOCAL_PG_USER'] %>
   host: <%= ENV['LOCAL_HOST'] %>
   password:
   min_messages: warning
+  schema_search_path: "public,postgis"
 
 development:
   <<: *default
   database: geolocationapp_development
+  script_dir: /usr/local/share/postgis
+  username: geo_rails_test
+  password:
+  su_username: <%= ENV['GEO_SUPERUSER'] %>
+  su_password: <%= ENV['GEO_SUPER_PWD'] %>
+  username: <%= ENV['GEO_USER'] %>
+  password: <%= ENV['GEO_PWD'] %>
 
 test:
   <<: *default
   database: geolocationapp_test
+  script_dir: /usr/local/share/postgis
+  su_username: <%= ENV['GEO_SUPERUSER'] %>
+  su_password: <%= ENV['GEO_SUPER_PWD'] %>
+  username: <%= ENV['GEO_USER'] %>
+  password: <%= ENV['GEO_PWD'] %>
 
 production:
   <<: *default

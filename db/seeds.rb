@@ -6,7 +6,7 @@ def seed_locations
 end
 
 
-if Location.count == 0
+if Location.count >= 0
     seed_locations
 else
   puts "Skipped Locations seed"

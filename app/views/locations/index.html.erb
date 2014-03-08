@@ -1,11 +1,12 @@
 <%= flash[:notice] %>
-<table>
+
+<h1> All Locations</h1>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Id</th>
       <th>Name</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
+      <th>Latitude/Longitude</th>
     </tr>
   </thead>
   <tbody>
@@ -13,8 +14,7 @@
       <tr>
         <td><%= loc.id %></td>
         <td><%= loc.name %></td>
-        <td><%= loc.latitude %></td>
-        <td><%= loc.longitude %></td>
+        <td><%= loc.latlon %></td>
       </tr>
     <% end %>
   </tbody>

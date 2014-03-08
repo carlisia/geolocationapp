@@ -7,8 +7,8 @@ class CreateLocations < ActiveRecord::Migration
       t.string :postal_code_name
       t.string :postal_code_suffix
       t.string :phone_number
-      t.decimal :latitude, :precision => 15, :scale => 10
-      t.decimal :longitude, :precision => 15, :scale => 10
+      t.string :name
+      t.point :latlon, :geographic => true
       t.integer :radius
       
       t.timestamps

@@ -1,9 +1,18 @@
-INDEX PAGE
+<h1>Geolocation App</h1>
 
-<div>
-<h3>Import a CSV File</h3>
-  <%= form_tag import_locations_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Import CSV" %>
-  <% end %>
-</div>
+<h3>Please select a file to upload</h3>
+
+    <label for="exampleInputFile">File input</label>
+ 
+    <%= form_tag import_locations_path, multipart: true do %> 
+    <div class="form-group">
+      <%= file_field_tag :file %>
+      <p class="help-block">Please select a tab delimited file.</p>
+      <%= submit_tag "Import CSV", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+<br>
+<h4>You may download a small sample file:
+<%= link_to('Download','/downloads/locations.tsv') %></h4>
+    

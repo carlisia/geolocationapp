@@ -6,6 +6,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+require 'active_record/connection_adapters/postgis_adapter/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -26,5 +27,6 @@ module Geolocationapp
     # config.i18n.default_locale = :de
     
     config.autoload_paths += %W(#{config.root}/lib)
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end

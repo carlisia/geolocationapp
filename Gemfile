@@ -11,6 +11,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'figaro'
 gem 'bootstrap-sass'
 gem 'high_voltage'
+gem 'simple_form'
+gem 'rgeo'
+gem 'activerecord-postgis-adapter'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
