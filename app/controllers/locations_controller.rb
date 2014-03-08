@@ -1,9 +1,14 @@
 class LocationsController < ApplicationController
   helper_method :locations, :location, :marker_set, :origin_point, :distance_from_origin
 
+  @@meters_in_mile = 1609.to_s
 
   def locations
-    @_locations ||= Location.order("ST_Distance(latlon,'" + origin_point.to_s + "') ASC")                                                   
+    @_locations ||= Location.find(
+      :all, 
+      :select => "*, ST_Distance(latlon,'" + origin_point.to_s + "') / " + @@meters_in_mile + " as distance",
+      :order  => "distance asc"
+    )
   end
   
   def marker_set
@@ -28,10 +33,10 @@ class LocationsController < ApplicationController
   def origin_point  
     lat = 33.1243208
     lon = -117.32582479999996
-    @_origin_point = RGeo::Geographic.spherical_factory.point(lon,lat)
+    @@origin_point = RGeo::Geographic.spherical_factory.point(lon,lat)
   end
   
-  def distance_from_origin location
+  def distance_from_origin
     @_distance = location.distance
   end
 end

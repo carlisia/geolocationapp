@@ -13,14 +13,14 @@
   </div>
   <br>
   <div class="row">
-  <div id="locTable" class="col-md-8">
+  <div id="locTable" class="col-md-6">
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Id</th>
       <th>Name</th>
       <th>Latitude/Longitude</th>
-      <th>Distance</th>
+      <th>Distance (miles)</th>
     </tr>
   </thead>
   <tbody>
@@ -28,8 +28,8 @@
       <tr>
         <td><%= loc.id %></td>
         <td><%= loc.name %></td>
-        <td><%= loc.latlon %></td>
-        <td><%= loc.latlon.distance(origin_point) %></td>
+        <td><%= loc.latlon.latitude %>/<%= loc.latlon.longitude %></td>
+        <td  class='distance'><%= loc.distance.round(2) %></td>
       </tr>
     <% end %>
   </tbody>
