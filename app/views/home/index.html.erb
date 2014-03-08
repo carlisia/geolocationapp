@@ -1,8 +1,6 @@
 <h1>Geolocation App</h1>
 
 <h3>Please select a file to upload</h3>
-
-    <label for="exampleInputFile">File input</label>
  
     <%= form_tag import_locations_path, multipart: true do %> 
     <div class="form-group">
@@ -15,4 +13,3 @@
 <br>
 <h4>You may download a small sample file:
 <%= link_to('Download','/downloads/locations.tsv') %></h4>
-    

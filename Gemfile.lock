@@ -63,6 +63,7 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    gmaps4rails (2.1.2)
     high_voltage (2.1.0)
     hike (1.2.3)
     i18n (0.6.9)
@@ -174,6 +175,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.2.1)
   faker (~> 1.1.2)
   figaro
+  gmaps4rails (= 2.1.2)
   high_voltage
   jbuilder (~> 1.2)
   jquery-rails

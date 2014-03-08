@@ -14,6 +14,7 @@ gem 'high_voltage'
 gem 'simple_form'
 gem 'rgeo'
 gem 'activerecord-postgis-adapter'
+gem 'gmaps4rails', '2.1.2'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
