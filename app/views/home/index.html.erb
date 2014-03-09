@@ -2,15 +2,16 @@
 
 <legend>Please select a file to upload</legend>
 
- 
-    <%= form_tag import_locations_path, multipart: true do %> 
+<div class=container> 
+  <%= form_tag import_locations_path, multipart: true do %> 
     <div class="form-group">
       <%= file_field_tag :file %>
       <p class="help-block">Please select a tab delimited file.</p>
       <%= submit_tag "Import CSV", class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+    </div>
+  <% end %>
 
-<br>
-<h4>You may download a small sample file:
-<%= link_to('Download','/downloads/locations.tsv') %></h4>
+  <br>
+  <h4>You may download a small sample file:
+  <%= link_to('Download','/downloads/locations.tsv') %></h4>
+</div>

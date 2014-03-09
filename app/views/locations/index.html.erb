@@ -5,24 +5,23 @@
 <h1> Locations</h1>
 
 <div class=container>
-  <%= render 'locations/input_for_sort' %>
+  <%= render 'locations/lat_lon_input' %>
   <div class="row">
     <div id="locTable" class="col-md-6">
       <%= render 'locations/map' %>
+      <h4>Locations within <%= search_radius %> miles and sorted by the shortest distance from the point of origin:</h4>
+      <h4><span class="label label-info">(<%= origin_point.latitude %>, <%= origin_point.longitude %>)</span></h4>
     </div>    
   </div>
-  <br>
   <div class="row">
-    
-    <div id="locTable" class="col-md-6">
+    <div id="locTable" class="col-md-8">
       <table class="table table-striped">
-        <h4>Locations sorted by the shortest distance from the point of origin</h4>
         <thead>
           <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Latitude/Longitude</th>
-            <th>Distance (miles)</th>
+            <th style="text-align:right">Distance (miles)</th>
           </tr>
         </thead>
         <tbody>

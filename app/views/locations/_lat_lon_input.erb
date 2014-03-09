@@ -1,0 +1,25 @@
+
+<legend>Use point of origin given or enter a new one</legend>
+
+<form class="form-vertical" role="form">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-3">
+        <label for="latitudeInput">Latitude</label>
+        <input type="text" class="form-control" id="latitudeInput" name="lat" value="<%= origin_point.latitude %>">
+      </div>
+      <div class="col-xs-3">
+        <label for="longitudeInput">Longitude</label>
+        <input type="text" class="form-control" id="longitudeInput" name="lon" value="<%= origin_point.longitude %>">
+      </div>
+      <div class="col-xs-3">
+        <label for="radiusInput">Radius (miles)</label>
+        <input type="text" class="form-control" id="radiusInput" name="radius" value="<%= search_radius %>">
+      </div>      
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="reset" class="btn btn-default">Reset</button>
+</form>
+<br>
+<br>

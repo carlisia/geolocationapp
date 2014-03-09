@@ -1,13 +1,16 @@
 class LocationsController < ApplicationController
-  helper_method :locations, :location, :marker_set, :origin_point, :distance_from_origin
+  helper_method :locations, :location, :marker_set, :origin_point, :distance_from_origin, :search_radius
 
   @@meters_in_mile = 1609.to_s
 
-  def locations point
+  # GET /locations
+  # GET /location.xml
+  def locations
     @_locations ||= Location.find(
       :all, 
-      :select => "*, ST_Distance(latlon,'" + point.to_s + "') / " + @@meters_in_mile + " as distance",
-      :order  => "distance asc"
+      :select => "*, ST_Distance(latlon,'" + origin_point.to_s + "') / " + @@meters_in_mile + " as distance",
+      :order  => "distance asc",
+      :conditions => "ST_Distance(latlon,'" + origin_point.to_s + "') < " + search_radius.to_s + "*"+@@meters_in_mile
     )
   end
   
@@ -19,7 +22,6 @@ class LocationsController < ApplicationController
     end   
   end
 
-  
   def import
     begin
       Location.import(params[:file])
@@ -29,17 +31,24 @@ class LocationsController < ApplicationController
     end
   end
   
-
-  def origin_point  
-    lat = 33.1243208
-    lon = -117.32582479999996
-    @@origin_point = RGeo::Geographic.spherical_factory.point(lon,lat)
-  end
-  
   def distance_from_origin
     @_distance = location.distance
   end
 
+  def origin_point  
+    params[:lat].present? ? lat = params[:lat] : lat = 33.1243208
+    params[:lon].present? ? lon = params[:lon] : lon = -117.32582479999996
+    @@origin_point = RGeo::Geographic.spherical_factory.point(lon,lat)
+  end
+  
+  def search_radius
+    radius_present? ? @_search_radius = params[:radius] : @_search_radius = 5
+  end 
+    
+  private
+  
+  def radius_present?
+    params[:radius].present?
+  end
+
 end
-
-

@@ -6,7 +6,7 @@ Geolocationapp::Application.routes.draw do
 
   resources :locations do
     get "/locations" => "location#index", only: [:index]
-    collection    { post :import }
+    post :import, :on => :collection
   end
 
 end
