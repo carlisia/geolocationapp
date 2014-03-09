@@ -3,10 +3,10 @@ class LocationsController < ApplicationController
 
   @@meters_in_mile = 1609.to_s
 
-  def locations
+  def locations point
     @_locations ||= Location.find(
       :all, 
-      :select => "*, ST_Distance(latlon,'" + origin_point.to_s + "') / " + @@meters_in_mile + " as distance",
+      :select => "*, ST_Distance(latlon,'" + point.to_s + "') / " + @@meters_in_mile + " as distance",
       :order  => "distance asc"
     )
   end
@@ -39,6 +39,7 @@ class LocationsController < ApplicationController
   def distance_from_origin
     @_distance = location.distance
   end
+
 end
 
 

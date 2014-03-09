@@ -5,35 +5,37 @@
 <h1> Locations</h1>
 
 <div class=container>
-  <div class="row">
-  <div id="locTable" class="col-md-12">
   <%= render 'locations/input_for_sort' %>
-  <%= render 'locations/map' %>
-  </div>
+  <div class="row">
+    <div id="locTable" class="col-md-6">
+      <%= render 'locations/map' %>
+    </div>    
   </div>
   <br>
   <div class="row">
-  <div id="locTable" class="col-md-6">
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Latitude/Longitude</th>
-      <th>Distance (miles)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% locations.each do |loc| %>
-      <tr>
-        <td><%= loc.id %></td>
-        <td><%= loc.name %></td>
-        <td><%= loc.latlon.latitude %>/<%= loc.latlon.longitude %></td>
-        <td  class='distance'><%= loc.distance.round(2) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div>
+    
+    <div id="locTable" class="col-md-6">
+      <table class="table table-striped">
+        <h4>Locations sorted by the shortest distance from the point of origin</h4>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Latitude/Longitude</th>
+            <th>Distance (miles)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% locations.each do |loc| %>
+            <tr>
+              <td><%= loc.id %></td>
+              <td><%= loc.name %></td>
+              <td><%= loc.latlon.latitude %>/<%= loc.latlon.longitude %></td>
+              <td  class='distance'><%= loc.distance.round(2) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

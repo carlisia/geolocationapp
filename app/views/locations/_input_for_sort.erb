@@ -1,11 +1,29 @@
-<h3>Locations sorted by the shortest distance from the point below</h3>
 
-<form class="navbar-form navbar-left" role="search">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="33.1243208">
-     <input type="text" class="form-control" placeholder="-117.32582479999996 ">
-     <button type="submit" class="btn btn-default">Submit</button>
-     <p class="help-block">You may input a new beginning point</p>
-  </div>
-</form>
+<legend>Use point of origin given or enter a new one</legend>
+
+<div class="row">
+  <div id="locTable" class="col-md-4">
+
+
+  <%= simple_form_for :thing, :url => locations_url, :html => { :class => 'form-vertical' } do |f| %>  
+                      
+    <%= f.input :latitude, :wrapper => :prepend, :label => false do %>
+      <%= content_tag :span, "Latitude", :class => "add-on" %>
+      <%= f.input_field :latitude, :value => "33.1243208" %>
+    <% end %>
+
+    <%= f.input :longitude, :wrapper => :prepend, :label => false do %>
+      <%= content_tag :span, "Longitude", :class => "add-on" %>
+      <%= f.input_field :longitude, :value => "-117.32582479999996" %>
+    <% end %>     
+    
+    <div class="form-actions">
+       <%= f.button :submit, 'Submit', :class => 'btn-primary' %>
+     </div>  
+
+  <% end %>
+  </div>    
+</div>
+
+<br>
 <br>
