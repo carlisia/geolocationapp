@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
+gem 'ruby', "2.1.1"
 gem 'pg'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
@@ -29,6 +30,11 @@ group :test do
   gem 'database_cleaner' 
   gem "shoulda-matchers", "~> 2.2.0" 
 end
+
+group :production do
+  gem 'rails_12factor'
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

@@ -16,7 +16,7 @@
 #
 default: &default
   adapter: postgis
-  encoding: utf8
+  encoding: unicode
   pool: 5
   username: <%= ENV['LOCAL_PG_USER'] %>
   host: <%= ENV['LOCAL_HOST'] %>
