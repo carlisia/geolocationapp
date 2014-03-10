@@ -2,16 +2,18 @@ class RelativeLocations
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
-  
+
   attr_accessor :lat, :lon, :radius, :format, :action, :controller, :search_radius
-  
-  #more validations are required for these values (format, etc):
+
+  #more validations are required for these values (format, lenght, etc):
   validates_presence_of :lat, :lon 
   
   METERS_IN_MILES = 1609.to_s
 
   def initialize(attributes = {})
-    @attributes = attributes.each do |name, value|
+    @attributes = attributes
+    ensure_params_have_values
+    @attributes.each do |name, value|
       send("#{name}=", value)
     end
     list
@@ -32,23 +34,27 @@ class RelativeLocations
     # url path to API documentation
   end
   
-  #Below this point, not part of the API
-  def origin_point  
-    RGeo::Geographic.spherical_factory.point(lon,lat)
+  def origin_point
+    RGeo::Geographic.spherical_factory.point(@attributes[:lon],@attributes[:lat])
   end
-  
+
+  # I decided to set a default value if params are empty. The solution could be more elegant.
+  def ensure_params_have_values
+    @attributes[:lat] = 33.1243208 unless @attributes[:lat].present? 
+    @attributes[:lon] = -117.32582479999996 unless @attributes[:lon].present? 
+    @attributes[:radius].present? ? @_search_radius = @attributes[:radius] : self.set_radius
+  end
+
   def persisted?
     false
   end  
   
-  private
-  
   def search_radius
-    radius_present? ? @_search_radius = @attributes[:radius] : @_search_radius = 5
-  end 
-  
-  def radius_present?
-    @attributes[:radius].present?
+    @_search_radius
   end
   
+  def set_radius
+     @_search_radius, @attributes[:radius]  = 5, 5
+  end
+
 end

@@ -3,14 +3,24 @@ class LocationsController < ApplicationController
   attr_accessor :locations, :search_radius, :origin_point
   
   def index
-    @_relative_locations ||= RelativeLocations.new(params)
-    if @_relative_locations.valid?  
+    @_relative_locations||= RelativeLocations.new(params)
+    if @_relative_locations.valid?
       self.locations = @_relative_locations.list
-      @search_radius = @_relative_locations.radius
+      self.search_radius = @_relative_locations.search_radius
       self.origin_point = @_relative_locations.origin_point
       marker_set
     else
-      redirect_to root_url
+      # This badly needs some rescuing:
+      redirect_to root_url, notice: "Something went wrong while trying to load locations."
+    end
+  end
+  
+  def import
+    begin
+      Location.import(params[:file])
+      redirect_to locations_url, notice: "Location list imported."
+    rescue
+      redirect_to root_url, notice: "Invalid CSV file format, or no file selected."
     end
   end
   
@@ -22,15 +32,6 @@ class LocationsController < ApplicationController
       marker.lng location.latlon.longitude
       marker.title location.name
     end   
-  end
-
-  def import
-    begin
-      Location.import(params[:file])
-      redirect_to locations_url, notice: "Location list imported."
-    rescue
-      redirect_to root_url, notice: "Invalid CSV file format, or no file selected."
-    end
   end
 
 end
