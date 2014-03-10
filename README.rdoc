@@ -6,15 +6,15 @@ PostGIS is a spatial database extender for PostgreSQL object-relational database
 
 The app accepts file uploads, stores the records in a database, and then displays a list of locations ordered by distance from a given point (lat/lon).
 
-## Development
+== Development
 
-### Rules of the road
+=== Rules of the road
 
 This project attempts to follow Sandi Metz's Rules.
 
 You can read a [description of the rules here](http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers).
 
-### Setup
+=== Setup
 
 1. Install Homebrew packages.
 
@@ -35,7 +35,7 @@ You can read a [description of the rules here](http://robots.thoughtbot.com/post
 
         $ open http://localhost:5000
         
-### To-do list
+=== To-do list
 
         $ Better error handling and reporting
         $ Better test coverage
