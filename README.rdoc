@@ -1,28 +1,43 @@
-== README
+# Geolocation App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This geolocation app demonstrates the use of PostGIS.
 
-Things you may want to cover:
+PostGIS is a spatial database extender for PostgreSQL object-relational database. It adds support for geographic objects allowing location queries to be run in SQL.
 
-* Ruby version
+The app accepts file uploads, stores the records in a database, and then displays a list of locations ordered by distance from a given point (lat/lon).
 
-* System dependencies
+## Development
 
-* Configuration
+### Rules of the road
 
-* Database creation
+This project attempts to follow Sandi Metz's Rules.
 
-* Database initialization
+You can read a [description of the rules here](http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers).
 
-* How to run the test suite
+### Setup
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Install Homebrew packages.
 
-* Deployment instructions
+        $ brew install postgres --no-python
 
-* ...
+2. Follow post-install instructions for loading launch agents.
 
+        $ brew info postgres
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+3. Install RVM.
+
+        $ \curl -L https://get.rvm.io | bash -s stable --ruby
+
+4. Get the code.
+        $ git clone git@github.com:carlisia/geolocationapp.git
+
+5. Verify that the app is up and running.
+
+        $ open http://localhost:5000
+        
+### To-do list
+
+        $ Better error handling and reporting
+        $ Better test coverage
+        $ Hookup to Code Climate
+        $ Document the API
