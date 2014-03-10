@@ -1,19 +1,21 @@
-class LocationsController < ApplicationController
-  helper_method :locations, :location, :marker_set, :origin_point, :distance_from_origin, :search_radius
-
-  @@meters_in_mile = 1609.to_s
-
-  # GET /locations
-  # GET /location.xml
-  def locations
-    @_locations ||= Location.find(
-      :all, 
-      :select => "*, ST_Distance(latlon,'" + origin_point.to_s + "') / " + @@meters_in_mile + " as distance",
-      :order  => "distance asc",
-      :conditions => "ST_Distance(latlon,'" + origin_point.to_s + "') < " + search_radius.to_s + "*"+@@meters_in_mile
-    )
+class LocationsController < ApplicationController 
+  helper_method :locations, :location, :marker_set, :origin_point, :search_radius
+  attr_accessor :locations, :search_radius, :origin_point
+  
+  def index
+    @_relative_locations ||= RelativeLocations.new(params)
+    if @_relative_locations.valid?  
+      self.locations = @_relative_locations.list
+      @search_radius = @_relative_locations.radius
+      self.origin_point = @_relative_locations.origin_point
+      marker_set
+    else
+      redirect_to root_url
+    end
   end
   
+  private
+
   def marker_set
     @_market_set = Gmaps4rails.build_markers(locations) do |location, marker|
       marker.lat location.latlon.latitude
@@ -29,26 +31,6 @@ class LocationsController < ApplicationController
     rescue
       redirect_to root_url, notice: "Invalid CSV file format, or no file selected."
     end
-  end
-  
-  def distance_from_origin
-    @_distance = location.distance
-  end
-
-  def origin_point  
-    params[:lat].present? ? lat = params[:lat] : lat = 33.1243208
-    params[:lon].present? ? lon = params[:lon] : lon = -117.32582479999996
-    @@origin_point = RGeo::Geographic.spherical_factory.point(lon,lat)
-  end
-  
-  def search_radius
-    radius_present? ? @_search_radius = params[:radius] : @_search_radius = 5
-  end 
-    
-  private
-  
-  def radius_present?
-    params[:radius].present?
   end
 
 end
