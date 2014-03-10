@@ -1,4 +1,4 @@
-# Geolocation App
+= Geolocation App
 
 This geolocation app demonstrates the use of PostGIS.
 
@@ -12,7 +12,11 @@ The app accepts file uploads, stores the records in a database, and then display
 
 This project attempts to follow Sandi Metz's Rules.
 
-You can read a [description of the rules here](http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers).
+A [description of the rules here](http://robots.thoughtbot.com/post/50655960596/sandi-metz-rules-for-developers).
+
+=== Dependency
+
+$ Rails 4.0.0
 
 === Setup
 
