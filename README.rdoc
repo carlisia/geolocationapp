@@ -18,6 +18,8 @@ A [description of the rules here](http://robots.thoughtbot.com/post/50655960596/
 
         $ Rails 4.0.0
         $ Ruby 2.1.1
+        $ PostgreSQL 9.2
+        $ PostGIS
 
 === Setup
 
@@ -28,15 +30,30 @@ A [description of the rules here](http://robots.thoughtbot.com/post/50655960596/
 2. Follow post-install instructions for loading launch agents.
 
         $ brew info postgres
+        
+3. To enable PostGIS once connected to your PostgreSQL 9.2 database run:
 
-3. Install RVM.
+        $ CREATE EXTENSION postgis;
+        
+4. Create a application.yml file under /config and add your ENV variables. Mine looks like this:
+        
+        $ LOCAL_PG_USER: "carlisia"
+        $ LOCAL_HOST: "localhost"
+
+        $ GEO_SUPERUSER: "geo_rails_test_creator"
+        $ GEO_SUPER_PWD: "geo_pwd"
+
+        $ GEO_USER: "geo_rails_test_creator"
+        $ GEO_PWD: "geo_pwd"
+
+4. Install RVM.
 
         $ \curl -L https://get.rvm.io | bash -s stable --ruby
 
-4. Get the code.
+5. Get the code.
         $ git clone git@github.com:carlisia/geolocationapp.git
 
-5. Verify that the app is up and running.
+6. Verify that the app is up and running.
 
         $ open http://localhost:5000
         
